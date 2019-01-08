@@ -1,0 +1,12 @@
+{
+    "include": [
+        "src/**/*"
+    ],
+    "compileOnSave": true,
+    "compilerOptions": {
+        "types": [
+            "node"
+        ],
+        "lib": ["es2015"]
+    }
+}
