@@ -8,14 +8,16 @@ export default class Reuters implements Crawler{
     private destURL: string;
 
     constructor(origin: string, dest: string){
-        this.originURL = this.buildURL(origin);
-        this.destURL = this.buildURL(dest)
+        this.originURL = this.buildURL(encodeURI(origin));
+        this.destURL = this.buildURL(encodeURI(dest))
     }
 
     getData(): void{
 
         axios.get(this.originURL)
         .then((res) => {
+            console.log('Reuters')
+            console.log('----------------')
             this.handleHTML(res.data, 'Origin')
         })
         .then(() => {
@@ -35,13 +37,13 @@ export default class Reuters implements Crawler{
         return `https://www.reuters.com/search/news?blob=cancelled+flights+${location}&sortBy=date&dateRange=pastWeek`;
     }
 
-    private handleHTML(data: string, location:string){
-        const originData = cheerio.load(data)
+    handleHTML(data: string, location:string){
+        const $ = cheerio.load(data)
 
             console.log(`${location} News:`)
-            originData('.search-result-content').each((index, elem) => {
+            $('.search-result-content').each((index, elem) => {
             
-                console.log(`${originData(elem).find('.search-result-timestamp').text()} - Title: ${originData(elem).find('.search-result-title').text()}`);
+                console.log(`Title: ${$(elem).find('.search-result-title').text()} (${$(elem).find('.search-result-timestamp').text()})`);
                 console.log(` `);
                 
             })

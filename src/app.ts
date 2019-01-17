@@ -3,6 +3,7 @@ import * as cheerio from 'cheerio';
 import * as inquirer from 'inquirer';
 import { crawlersArray, loader } from './loader';
 import Reuters from './crawlers/reuters';
+import GoogleNews from './crawlers/googlenews';
 const airports = require('../airports.json')
 
 /*
@@ -38,17 +39,11 @@ inquirer
     const originCity = airports[answers.origin].city;
     const destCity = airports[answers.dest].city;
 
-    // console.log(airports[answers.origin].city)
-    // console.log(airports[answers.dest].city)
-
-    const testReuters = new Reuters(originCity, destCity)
-
-    testReuters.getData()
+    // const testSoleClass = new GoogleNews(originCity, destCity)
+    // testSoleClass.getData()
 
 
-    // loader(originCity, destCity)
-    // console.log(crawlersArray)
-
+    loader(originCity, destCity)
     crawlersArray.forEach((crawler) => {
         crawler.getData();
     })

@@ -1,9 +1,6 @@
-// import reuters from './crawlers/reuters';
 import { Crawler } from './interface';
-// import glob from 'glob';
-import * as glob from 'glob';
-import * as path from 'path';
 import Reuters from './crawlers/reuters';
+import GoogleNews from './crawlers/googlenews';
 
 
 export const crawlersArray: Array<Crawler> = [];
@@ -14,8 +11,9 @@ export function loader(origin: string, dest: string):void{
     console.log('Loading loading')
 
     const reuters = new Reuters(origin, dest);
+    const googleNews = new GoogleNews(origin, dest);
 
-    crawlersArray.push(reuters)
+    crawlersArray.push(reuters, googleNews)
 
 }
 
