@@ -1,18 +1,6 @@
-import axios from 'axios';
-import * as cheerio from 'cheerio';
 import * as inquirer from 'inquirer';
 import { crawlersArray, loader } from './loader';
-import Reuters from './crawlers/reuters';
-import GoogleNews from './crawlers/googlenews';
 const airports = require('../airports.json')
-
-/*
-
-BBC
-Reuturs
-CNN
-
-*/
 
 
 inquirer

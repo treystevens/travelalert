@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import * as chalk from 'chalk';
 import { Crawler } from '../interface'
 
 export default class Reuters implements Crawler{
@@ -16,8 +17,9 @@ export default class Reuters implements Crawler{
 
         axios.get(this.originURL)
         .then((res) => {
-            console.log('Reuters')
-            console.log('----------------')
+            console.log(chalk.cyan.bgWhite.bold('Reuters'))
+            console.log(chalk.cyan('--------------------------------'))
+            console.log(' ')
             this.handleHTML(res.data, 'Origin')
         })
         .then(() => {
@@ -40,14 +42,14 @@ export default class Reuters implements Crawler{
     handleHTML(data: string, location:string){
         const $ = cheerio.load(data)
 
-            console.log(`${location} News:`)
-            $('.search-result-content').each((index, elem) => {
-            
-                console.log(`Title: ${$(elem).find('.search-result-title').text()} (${$(elem).find('.search-result-timestamp').text()})`);
-                console.log(` `);
-                
-            })
+        console.log(`${chalk.blueBright(location + ' News:')}`)
+        $('.search-result-content').each((index, elem) => {
+        
+            console.log(`Title: ${chalk.whiteBright.bold($(elem).find('.search-result-title').text())} (${chalk.gray($(elem).find('.search-result-timestamp').text())})`);
             console.log(` `);
+            
+        })
+        console.log(` `);
     }
 
 

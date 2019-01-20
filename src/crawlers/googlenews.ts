@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 import { Crawler } from '../interface'
+import * as chalk from 'chalk';
 
 export default class GoogleNews implements Crawler{
 
@@ -16,8 +17,10 @@ export default class GoogleNews implements Crawler{
 
         axios.get(this.originURL)
         .then((res) => {
-            console.log('Google News')
-            console.log('----------------')
+            console.log(chalk.cyan.bgWhite.bold('Google News'))
+            
+            console.log(chalk.cyan('--------------------------------'))
+            console.log(' ')
             this.handleHTML(res.data, 'Origin')
         })
         .then(() => {
@@ -43,12 +46,12 @@ export default class GoogleNews implements Crawler{
         const $ = cheerio.load(data)
 
         const sortedNews: Array<any> = this.sortElements(this.sliceNews($('.xrnccd')));
-        
+
         // *** sortedNews not outputting sorted order correctly 
-        console.log(`${location} News:`)
+        console.log(`${chalk.blueBright(location + ' News:')}`)
         $(sortedNews).each((index, elem) => {
         
-            console.log(`[${$(elem).find('.KbnJ8').text()}] - Title: ${$(elem).find('.ipQwMb').find('span').text()} (${$(elem).find('time').text()})`);
+            console.log(`[${$(elem).find('.KbnJ8').text()}] - Title: ${chalk.whiteBright.bold($(elem).find('.ipQwMb').find('span').text())} (${chalk.gray($(elem).find('time').text())})`);
             console.log(` `);
             
         })
