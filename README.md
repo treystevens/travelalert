@@ -28,3 +28,7 @@ Alternative to above command:
 $ npm run build
 $ npm run start
 ```
+
+Example:
+![Travel Alert Demo](https://res.cloudinary.com/dr4eajzak/image/upload/v1548135709/profile/travelalertgif.gif)
+
